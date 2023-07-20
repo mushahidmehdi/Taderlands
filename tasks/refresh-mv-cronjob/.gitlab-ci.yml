@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: refresh-mv-cronjob
+  SERVICE_BASE_PATH: tasks/refresh-mv-cronjob
+
+refresh-mv-cronjob-docker:
+  extends: .dockerize
+
+refresh-mv-cronjob-deploy:
+  extends: .aws

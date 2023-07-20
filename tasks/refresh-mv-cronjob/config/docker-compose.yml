@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+    refresh-mv-cronjob:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-refresh-mv-cronjob:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: refresh-mv-cronjob
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            BACKEND_URL: http://${MASTER_IP}
+            SERVICE_TAGS: backend,api,refresh-mv-cronjob

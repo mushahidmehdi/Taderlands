@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+variables:
+  SERVICE_NAME: register-legacy
+  SERVICE_BASE_PATH: services/register-legacy
+
+register-legacy-deploy:
+  extends: .aws

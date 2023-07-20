@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    marketing-feeder-cronjob:
+        ports:
+            - 0:3000
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: marketing-feeder-cronjob-${AWS_ENV}
+                awslogs-stream-prefix: paratica

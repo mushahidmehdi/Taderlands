@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: sms-sender
+  SERVICE_BASE_PATH: services/sms-sender
+
+sms-sender-docker:
+  extends: .dockerize
+
+sms-sender-deploy:
+  extends: .aws

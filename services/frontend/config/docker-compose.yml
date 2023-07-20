@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    frontend:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-frontend:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: frontend
+            REACT_APP_NODE_ENV: ${AWS_ENV}
+            REACT_APP_GTAG_ID: G-GC4LFFJ5L8
+            REACT_APP_API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            REACT_APP_WS_ROOT: wss://aws${CLUSTER_DOMAIN_POSTFIX}/ws/feeder
+            REACT_APP_CDN_ROOT: https://${CLUSTER_DOMAIN_CDN}
+            REACT_APP_LANDING_ROOT: https://www${CLUSTER_DOMAIN_POSTFIX2}
+            REACT_APP_INTERCOM_APP_ID: ypr693mf
+            REACT_APP_CAPTCHA_KEY: 6Le1LIklAAAAAJj-ZYwUBPNY0pKFnbVyC0C8_lIG
+            SERVICE_TAGS: "\
+                frontend,\
+                traefik.enable=true,\
+                traefik.http.middlewares.frontend-redirect.redirectScheme.scheme=https,\
+                traefik.http.middlewares.frontend-redirect.redirectScheme.permanent=true,\
+                traefik.http.routers.frontend.entrypoints=web,\
+                traefik.http.routers.frontend.rule=Host(`app${CLUSTER_DOMAIN_POSTFIX}`)||Host(`app${CLUSTER_DOMAIN_POSTFIX2}`),\
+                traefik.http.routers.frontend.middlewares=frontend-redirect,\
+                traefik.http.routers.frontend-secure.entrypoints=websecure,\
+                traefik.http.routers.frontend-secure.rule=Host(`app${CLUSTER_DOMAIN_POSTFIX}`)||Host(`app${CLUSTER_DOMAIN_POSTFIX2}`),\
+                traefik.http.routers.frontend-secure.tls=true"

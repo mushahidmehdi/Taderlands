@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    marketplace:
+        ports:
+            - 0:3000
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: marketplace-${AWS_ENV}
+                awslogs-stream-prefix: paratica

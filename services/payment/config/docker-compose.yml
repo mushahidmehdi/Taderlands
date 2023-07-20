@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+    payment:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-payment:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: payment
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            FRONTEND_URL : https://www${CLUSTER_DOMAIN_POSTFIX2}
+            IYZICO_ENDPOINT: https://sandbox-api.iyzipay.com
+            TWO_FACTOR_AUTHENTICATION_APP_NAME: Traderlands
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            COINSPAID_ENDPOINT: https://app.alphapo.net
+            KEYCLOAK_BASE_URL: https://aws${CLUSTER_DOMAIN_POSTFIX}/auth 
+            KEYCLOAK_REALM: paratica
+            KEYCLOAK_ADMIN_CLIENT_ID: paratica-backend
+            KEYCLOAK_CLIENT_ID: paratica-rest
+            KYC_VALIDATION_URL: https://kyc${CLUSTER_DOMAIN_POSTFIX2}/techsign-web-card-detection/
+            KYC_API_URL: https://api.proveid.io/id/start
+            IP_STACK_API_URL: http://api.ipstack.com
+            KYC_VERIFY_FACE_TR_URL: https://api.proveid.io
+            KYC_VERIFY_FACE_FOREIGN_URL: http://18.194.184.80/rkyc
+            SLACK_WEBHOOK_URL: TPC4D977Y/B052XDPUG9G/eqt64uHmFHNbPkEAFMCqVdz4
+            SERVICE_TAGS: "\
+                backend,api,payment,\
+                traefik.enable=true,\
+                traefik.http.middlewares.payment-strip.stripPrefix.prefixes=/api/payment,\
+                traefik.http.routers.payment-backend.entrypoints=websecure,\
+                traefik.http.routers.payment-backend.rule=PathPrefix(`/api/payment`),\
+                traefik.http.routers.payment-backend.middlewares=payment-strip\\,jwt-auth,\
+                traefik.http.routers.payment-backend.tls=true"

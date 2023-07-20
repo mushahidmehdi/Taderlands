@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+    landing:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-landing:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: landing
+            REACT_APP_NODE_ENV: ${AWS_ENV}
+            REACT_APP_API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            REACT_APP_FRONTEND_ROOT: https://app${CLUSTER_DOMAIN_POSTFIX}
+            REACT_APP_WS_ROOT: wss://aws${CLUSTER_DOMAIN_POSTFIX}/ws/feeder
+            REACT_APP_CDN_ROOT: https://${CLUSTER_DOMAIN_CDN}
+            SERVICE_TAGS: "\
+                landing,\
+                traefik.enable=true,\
+                traefik.http.middlewares.landing-redirect.redirectScheme.scheme=https,\
+                traefik.http.middlewares.landing-redirect.redirectScheme.permanent=true,\
+                traefik.http.routers.landing.entrypoints=web,\
+                traefik.http.routers.landing.rule=Host(`www${CLUSTER_DOMAIN_POSTFIX}`)||Host(`www${CLUSTER_DOMAIN_POSTFIX2}`),\
+                traefik.http.routers.landing.middlewares=landing-redirect,\
+                traefik.http.routers.landing-secure.entrypoints=websecure,\
+                traefik.http.routers.landing-secure.rule=Host(`www${CLUSTER_DOMAIN_POSTFIX}`)||Host(`www${CLUSTER_DOMAIN_POSTFIX2}`),\
+                traefik.http.routers.landing-secure.tls=true"

@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: dashboard
+  SERVICE_BASE_PATH: services/dashboard
+
+dashboard-docker:
+  extends: .dockerize
+
+dashboard-deploy:
+  extends: .aws

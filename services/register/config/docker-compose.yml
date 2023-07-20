@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+    register:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-register:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: register
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            KEYCLOAK_BASE_URL: https://${CLUSTER_DOMAIN}/auth
+            KEYCLOAK_REALM: paratica
+            KEYCLOAK_ADMIN_CLIENT_ID: paratica-backend
+            KEYCLOAK_CLIENT_ID: paratica-rest
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            USER_BASE_PROFIT_FEE: 0.03
+            USER_BASE_VOLUME_FEE: 0.001
+            DATE_CONTROL_RANGE: 7
+            FRONTEND_URL: https://app${CLUSTER_DOMAIN_POSTFIX2}
+            SERVICE_TAGS: "\
+                backend,api,register,\
+                traefik.enable=true,\
+                traefik.http.middlewares.register-strip.stripPrefix.prefixes=/api/register,\
+                traefik.http.routers.register.entrypoints=websecure,\
+                traefik.http.routers.register-special.entrypoints=websecure,\
+                traefik.http.middlewares.register-special-ipwhitelist.ipwhitelist.sourcerange=85.93.89.245,\
+                traefik.http.middlewares.register-special-ipwhitelist.ipwhitelist.ipstrategy.depth=1,\
+                traefik.http.routers.register.rule=PathPrefix(`/api/register`),\
+                traefik.http.routers.register-special.rule=Path(`/api/register/migrate-credit`),\
+                traefik.http.routers.register.middlewares=register-strip,\
+                traefik.http.routers.register-special.middlewares=register-strip\\,register-special-ipwhitelist,\
+                traefik.http.routers.register.tls=true"

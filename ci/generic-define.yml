@@ -1,0 +1,20 @@
+.web-rule: &web-rule
+  if: $PIPELINE_SOURCE == "web" && ($CI_COMMIT_BRANCH =~ /(master|develop|feature|fix)/)
+
+.build-rule: &build-rule
+  - $SERVICE_BASE_PATH/config/*
+  - $SERVICE_BASE_PATH/Dockerfile
+  - $SERVICE_BASE_PATH/.gitlab-ci.yml
+
+.push-rule: &push-rule
+  if: $PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH =~ /(master|develop)/
+  changes: *build-rule
+
+.cache: &cache
+  key:
+    files:
+      - $SERVICE_BASE_PATH/src/build.env
+    prefix: $BUILD_NAME
+  paths:
+    - $SERVICE_BASE_PATH/src/build.env
+  policy: pull-push

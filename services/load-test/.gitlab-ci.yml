@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: load-test
+  SERVICE_BASE_PATH: services/load-test
+
+load-test-docker:
+  extends: .dockerize
+
+load-test-deploy:
+  extends: .aws

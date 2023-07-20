@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>RKYC Web Face Recognition</title>
+  <script defer src="./assets/js/axios-1.2.1.js"></script>
+  <script defer src="./assets/js/ffmpeg-all-codecs.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="./assets/js/config.js"></script>
+  <script src="./assets/js/techsign-face-detection.js"></script>
+  <script src="../config.js"></script>
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="shortcut icon" href="./assets/images/fav_32.png">
+</head>
+
+<body>
+  <script>
+
+
+    window.onload = function () {
+
+      let detectFaceNow;
+
+      detectFaceNow = new detectFace({
+          debug: false,
+          gestureType: '',
+          lang: 'en'        
+        });
+
+      detectFaceNow.domain = window.env.REACT_APP_API_ROOT+"/payment/kyc/proxy";
+      
+      detectFaceNow.onRecordSuccess = async function (videoBlob, base64Video) {
+        $('.spinner').hide();
+        var rotate = this.getMobileOperatingSystem() === "unknown" ? 0 : 90;
+
+        var body = {
+          "transactionId": detectFaceNow.transactionId,
+          "video": base64Video.replace('data:video/mp4;base64,', '').replace('data:video/webm;base64,', ''),
+          "rotate": rotate
+        }
+
+        var options = {
+          method: "POST",
+          url: detectFaceNow.domain+detectFaceNow.url,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify(body),
+          maxRedirects: 20,
+        };
+
+        var result = await getWebservisResult(options);
+
+        if (!result?.data?.data?.verifyStatus) {
+
+          const failPageUrl="kyc-fail.html?transactionId="+detectFaceNow.transactionId;
+
+          setTimeout(function () {
+            window.location.href = "../"+failPageUrl;
+          }, 500);
+          return;
+        }
+
+        setTimeout(function () {
+          window.location.href = window.env.REACT_APP_FRONTEND_ROOT + "/security";
+        }, 500);
+
+      }
+
+      async function getWebservisResult(options) {
+        var response = await callWebServis(options);
+        return response;
+      }
+
+      function callWebServis(options) {
+        return new Promise((resolve, reject) => {
+          axios.request(options).then(function (response) {
+            resolve(response);
+          }).catch(function (error) {
+            resolve(error);
+          });
+        });
+      }
+
+      detectFaceNow.waitingForCamera = function () {
+        console.log("waiting for camera")
+      }
+      detectFaceNow.onFaceDetected = function () {
+        console.log("face detected")
+      }
+      detectFaceNow.onReadyDetect = function () {
+        console.log("ready to detect");
+      };
+      detectFaceNow.onFaceLostWhileRecording = function () {
+        console.log("face lost on recording");
+      };
+      detectFaceNow.onFaceLost = function () {
+        console.log("face lost");
+      };
+      detectFaceNow.onRecordStarted = function () {
+        console.log("recording started");
+      };
+    }
+  </script>
+</body>
+
+</html>

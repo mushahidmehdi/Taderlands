@@ -1,0 +1,108 @@
+{
+	"lang": "English",
+	"home": "Home",
+	"features": "Features",
+	"blog": "Blog",
+	"aboutUs": "About Us",
+	"faq": "FAQ",
+
+	"strategyTitle": "Publish a strategy and monetize",
+	"strategyP1": "Craft your unique trading strategy, rigorously backtest it, and seize the opportunity to showcase your expertise by becoming a trading strategy publisher on the Traderlands marketplace. \n\n By listing your strategy, you'll not only empower fellow traders to follow and execute it, but also unlock the potential to lucratively monetize your skills and knowledge. Embrace this thrilling chance to turn your trading prowess into a profitable venture!",
+
+	"marketplace": "Marketplace",
+
+	"marketplaceP1": "Are you tired of sifting through countless trading strategies that don't align with your approach? Fear not, for I have a solution. Utilize our search and filtering strategies to pinpoint the best trading strategy for you.",
+
+	"marketplaceP2": " With advanced filter options that cater to market direction, long and short positions, finding the right strategy for various market conditions has never been easier. But don't just take our word for it, we provide historical backtest data and real-time trade statistics to help you make an informed decision and choose the strategy that best fits your needs.",
+
+	"marketplaceP3": "Take charge of your trading approach today and let us help you find the strategy that will lead to success.",
+
+	"mainTitle": "Unlock the Power of Social Algorithmic Trading with Traderlands",
+	"mainSubHeading": "Start your algorithmic trading journey by using backtested trading strategies that work on major exchanges or create one in a few clicks.",
+
+	"getStart": "Get Started",
+	"watchTutorials": "Watch Tutorials",
+
+	"strategyCreators": "Algorithmic Trading \n Made Simple",
+	"strategyCreatorsText": "No-code, Easy-to-Use, Social Trading Platform. \n Create your trading strategy on the play and plug strategy creator tool without writing a single line of code \n or start using strategies on the marketplace in a few clicks.",
+	"invest_1_backtest": "Design and backtest your trading strategies using historical data, ensuring their validity before diving into real-time trading. \n\n Build your approach on the foundation of a proven edge, rather than relying on instincts, hearsay, or following the crowd. The best part? You can enjoy all these invaluable features at absolutely zero cost with our powerful tool!",
+	"invest_1_indicators": "Our platform offers an extensive array of indicators for you to mix and match in crafting your ideal trading strategies. \n\nTrust Traderlands to convert your strategy into a fully automated trading bot, while we continually strive to incorporate new indicators into the Strategy Creator Tool. With our platform, you'll never miss a trade again when the market aligns with your strategic vision.",
+
+	"invest_1_no_code_bots": "Experience the power of our No-Code Strategy Creator Tool, empowering traders to effortlessly craft their own trading bots without any programming expertise. \n\nTransform any strategy, grounded in technical indicators, into a fully automated, no-code trading bot. And the best part? This incredible tool comes at zero cost, ensuring you don't need a coding background or a hefty budget to get started!",
+
+	"invest_1_share_to_win": "Share to Earn is what sails the Social-Trading boat into new frontiers! \n\n We have developed the most capable strategy builder in crypto land for you to test your skills. But that is not enough, we encourage you to come out and publish your wits for the community to profit. When a user profits by following your strategy, you are awarded with Traderlands credits, they win, you win. They don't ? You better up your game!",
+
+	"algorithmicTrading": "Algorithmic Trading \n Made Simple",
+	"invest_0_easy_to_use": "Effortlessly explore the world of algorithmic trading with our user-friendly trading bot platform. \n\n Simply register, link your exchange accounts through API integration, and embark on your journey in mere moments.",
+
+	"invest_0_social_trading": "Discover a diverse assortment of trading tactics, crafted by seasoned professionals boasting transparent performance histories and backed by historical data. \n\n Our marketplace caters to users of all skill levels, enabling you to filter strategies based on your preferences and market dynamics. Effortlessly access both long and short approaches with a mere click.",
+
+	"invest_0_customized_bots": "Tailor and execute pre-built trading strategies to suit your requirements and risk management preferences. \n\nOur intuitive platform enables users to establish stop-loss and take-profit levels, allocate funds to each strategy, and enjoy a seamless, 24/7 automated trading experience with utmost simplicity.",
+
+	"invest_0_win_to_share": "Traderlands market runs on  \" Earn and Share \" By profiting from a strategy, the creator is rewarded with the credits consumed, if you don't profit then you pay nothing thus creating a win-win situation for everyone involved. \n\n As a community thrives on shared success, spread the love! Join the community, grow through trade, and experience the power of collective prosperity!",
+
+	"howitwork": "How does it work?",
+	"howitworkP1": "Traderlands is the platform where you can find hundreds of tools to manage your portfolio efficiently.",
+
+	"strategyCreatorTool": "Strategy Creator Tool",
+
+	"noCodeNeeded": "No code needed",
+	"noCodeNeededP1": "Unlock the full potential of our zero-cost, integrated strategy creator tool, which boasts an extensive selection of Tradingview indicators for crafting trading strategies in just minutes. ",
+	"noCodeNeededP2": "Effortlessly connect your pre-designed Tradingview strategy and, once established, backtest and run it using virtual trading to evaluate its performance against real-time market data—all without spending a dime!",
+	"noCodeNeededP3": "",
+
+	"mobileApp": "Mobile App",
+	"mobileAppP1": "Traderlands, the ultimate mobile app for Android and iOS that allows you to unlock the power of social algorithmic trading. Whether you're a seasoned trader or just getting started, Traderlands makes it easier to manage, monitor, and automate your trades on the go.",
+
+	"mobileAppP2": "With Traderlands, you can use any trading strategy you like on the marketplace to start your algorithmic trading journey. Don't miss any trade setup on the 24/7 open market, as you'll receive real-time notifications on your mobile device.",
+	"mobileAppP3": "Download Traderlands now and take your trading to the next level. Join the growing community of traders who are already benefiting from the power of social algorithmic trading on the go.",
+
+	"tradingCommunity": "Embrace the Social Trading Revolution with Traderlands",
+	"tradingCommunityP1": "Join Traderlands and transform your trading experience on major exchanges into a social adventure. Say goodbye to solitary trading pursuits. \n\n Stay updated on current market news, stories, and engage with accomplished traders. Traderlands goes beyond to help you manage your connected trading platforms in one place, offering an extensive range of social features designed to unite people from across the globe. Connect, exchange wisdom, and elevate your trading prowess in our vibrant, global community.",
+
+	"socialTradingCommunity": "Create a Trading Community",
+
+	"socialTradingCommunityP1": "Traderlands expands trading by infusing it with a social dimension. By publishing your strategy on the marketplace, you'll foster a vibrant community around your approach, attracting more users and nurturing valuable interactions. Embrace the power of social trading and watch your strategy's reach soar!",
+
+	"riskManagement": "Risk Management",
+	"riskManagementP1": "Stay safe by acting on your own risk perception when using the pre-designed strategies available in the Traderlands Marketplace.",
+	"riskManagementP2": "While using multiple crypto trading strategies at once, it will not matter which direction the market swings.",
+	"riskManagementP3": "Easily control your total budget with risk management by setting different parameters like Stop-Loss, Take Profit and Trade Amount for each strategy.",
+	"creditCard": "Fair Credit Usage Method",
+	"creditCardP1": "Sign up for free, find the strategies that will lead you to success, and continue to run the bots using the credits in your account only if you profit.",
+	"creditCardP2": "Succeed first, automatically manage your portfolio to reach your goals without risking an upfront cost.",
+	"cookieH": "Your Privacy - Your Choice!",
+	"cookieP": "We use browser cookies in accordance with legal regulations in order to provide you with a better user experience. You can get detailed information on our ",
+	"cookieP2": "cookie policy",
+	"cookieP3": " page.",
+	"accept": "Accept all",
+	"settings": "Customize",
+	"customH": "Cookie Settings",
+	"customP": "Cookies are small text files that are saved on your computer or mobile device when you visit our website. We use cookies to ensure the secure operation of our website, to provide live support services to our users, to enable you to browse our website and to benefit from the services and features on our website, to provide you with a better experience and to improve our services in accordance with you, to increase the performance of our website and to make our website more user-friendly. Review ",
+	"customP2": "Cookie Policy",
+	"customP3": " ",
+	"mandatory": "Required (Mandatory Cookies)",
+	"preference": "Preference and Functionality Cookies",
+	"analytics": "Analytics Cookies",
+	"save": "Save Settings",
+
+	"toggle_user": "User",
+	"toggle_user_1": "User",
+	"toggle_creator": "Strategy Creator",
+	"toggle_creator_1": "Creator",
+
+	"expert_navigation_backtest": "Backtest",
+	"expert_navigation_indicators": "Indicators",
+	"expert_navigation_no_code_bots": "No-Code Bots",
+	"expert_navigation_share_to_win": "Share2Win",
+
+	"strategy_navigation_easy_to_use": "Easy-to-Use",
+	"strategy_navigation_social_trading": "Social-trading",
+	"strategy_navigation_customized_bots": "Customized Bots",
+	"strategy_navigation_customized_win_to_share": "Win2Share",
+
+	"user_agreement": "User Agreement",
+	"privacy_policy": "Privacy Policy",
+	"cookies_policy": "Cookie Policy",
+	"aml_policy": "AML - KYC Policy"
+}

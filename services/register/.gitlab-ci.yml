@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: register
+  SERVICE_BASE_PATH: services/register
+
+register-docker:
+  extends: .dockerize
+
+register-deploy:
+  extends: .aws

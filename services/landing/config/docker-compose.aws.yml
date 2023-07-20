@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    landing:
+        ports:
+            - 0:80
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: landing-${AWS_ENV}
+                awslogs-stream-prefix: paratica

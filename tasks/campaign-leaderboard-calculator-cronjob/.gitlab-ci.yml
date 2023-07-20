@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: campaign-leaderboard-calculator-cronjob
+  SERVICE_BASE_PATH: tasks/campaign-leaderboard-calculator-cronjob
+
+campaign-leaderboard-calculator-cronjob-docker:
+  extends: .dockerize
+
+campaign-leaderboard-calculator-cronjob-deploy:
+  extends: .aws

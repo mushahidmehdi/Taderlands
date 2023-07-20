@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  backtest:
+    ports:
+      - 0:3000
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: eu-central-1
+        awslogs-group: backtest-${AWS_ENV}
+        awslogs-stream-prefix: paratica

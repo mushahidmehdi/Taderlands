@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: marketing-feeder-cronjob
+  SERVICE_BASE_PATH: tasks/marketing-feeder-cronjob
+
+marketing-feeder-cronjob-docker:
+  extends: .dockerize
+
+marketing-feeder-cronjob-deploy:
+  extends: .aws

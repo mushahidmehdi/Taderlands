@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: kyc
+  SERVICE_BASE_PATH: services/kyc
+
+kyc-docker:
+  extends: .dockerize
+
+kyc-deploy:
+  extends: .aws

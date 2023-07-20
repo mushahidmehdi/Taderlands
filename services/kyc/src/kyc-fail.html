@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Traderlands - KYC</title>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+		body {
+			font-family: 'Comfortaa', sans-serif;
+		}
+
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			height: 100vh;
+		}
+
+		.image {
+			max-width: 100%;
+			max-height: 100%;
+		}
+
+		.header,
+		.sub-header {
+			text-align: center;
+			color: #3a3a3a;
+		}
+
+		.button {
+			display: inline-block;
+			padding: 16px 20px;
+			margin: 5px;
+			min-width: 300px;
+			border-radius: 4px;
+			background-color: #0f20e8;
+			color: white;
+			text-align: center;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			text-decoration: none
+		}
+
+		.white-border {
+			background-color: #ffffff;
+			color: #0f20e8;
+			border: 1px solid #0f20e8
+		}
+
+		.white-border:hover {
+			background-color: #F1F1F5 !important;
+		}
+
+		.button:hover {
+			background-color: #3F4DED;
+		}
+
+		.button-group {
+			margin: 20px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		@media screen and (max-width: 600px) {
+			.button {
+				display: block;
+				margin: 20px auto;
+			}
+		}
+	</style>
+	<script src="./config.js"></script>
+
+</head>
+
+<body>
+	<div class="container">
+		<img src="https://cdn2.paratica.com/general/landing-page/failedKyc.svg" alt="failedImage" class="image">
+		<div class="header">
+			<h1>ID proof didn’t match!</h1>
+		</div>
+		<div class="sub-header">Oops! We're sorry, but there was an error during the KYC process. <br>Please give it
+			another try, and we appreciate your patience.</div>
+		<div class="button-group">
+			<button onclick=forwardToVerifyPage() class="button">Verify Again</button>
+			<button onclick=forwardToHomePage() class="button white-border">Return to Traderlands</button>
+		</div>
+	</div>
+</body>
+
+</html>
+<script>
+	function forwardToHomePage() {
+		const frontendRootUrl = window.env.REACT_APP_FRONTEND_ROOT;
+		window.location.href = frontendRootUrl
+	};
+
+	function forwardToVerifyPage() {
+		const kycHomePage = "/techsign-web-card-detection/" + window.location.search;
+		window.location.href = kycHomePage
+	};
+</script>

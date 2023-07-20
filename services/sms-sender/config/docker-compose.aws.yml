@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+    sms-sender:
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: sms-sender-${AWS_ENV}
+                awslogs-stream-prefix: paratica

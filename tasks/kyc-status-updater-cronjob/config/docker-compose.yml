@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+    kyc-status-updater-cronjob:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-kyc-status-updater-cronjob:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: kyc-status-updater-cronjob
+            NODE_ENV: ${AWS_ENV}
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            KYC_REFRESH_INTERVAL_MINUTES: 15
+            NOTIFICATIN_TEMPLATE_TITLE: API_END_TIME
+            SERVICE_TAGS: backend,api,kyc-status-updater-cronjob

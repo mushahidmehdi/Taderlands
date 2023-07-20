@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    strategy:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-strategy:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: strategy
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            NODE_ENV: ${AWS_ENV}
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            SERVICE_TAGS: "\
+                backend,api,strategy,\
+                traefik.enable=true,\
+                traefik.http.middlewares.strategy-strip.stripPrefix.prefixes=/api/strategy,\
+                traefik.http.routers.strategy.entrypoints=websecure,\
+                traefik.http.routers.strategy.rule=PathPrefix(`/api/strategy`),\
+                traefik.http.routers.strategy.middlewares=strategy-strip\\,jwt-auth,\
+                traefik.http.routers.strategy.tls=true"

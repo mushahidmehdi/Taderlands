@@ -1,0 +1,33 @@
+import React from "react";
+import { Provider as ReactReduxProvider } from "react-redux";
+
+import { persistReducer, persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import storage from "redux-persist/lib/storage";
+import thunk from "redux-thunk";
+
+import { applyMiddleware, createStore } from "@reduxjs/toolkit";
+
+const defaultPersistConfig = {
+	key: "paratica",
+	storage,
+};
+
+export function configureRedux(reducer, options) {
+	const persistConfig = Object.assign({}, defaultPersistConfig, options);
+	const persistedReducer = persistReducer(persistConfig, reducer);
+	const store = createStore(persistedReducer, applyMiddleware(thunk));
+	const persistor = persistStore(store);
+
+	return { store, persistor };
+}
+
+export default function ReduxProvider({ store, persistor, children }) {
+	return (
+		<ReactReduxProvider store={store}>
+			<PersistGate loading={null} persistor={persistor}>
+				{children}
+			</PersistGate>
+		</ReactReduxProvider>
+	);
+}

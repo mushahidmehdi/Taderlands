@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+    <script src="./config.js"></script>
+</head>
+
+<body>
+    <div class="mainbox">
+        <div class="err">4</div>
+        <i class="far fa-question-circle fa-spin"></i>
+        <div class="err2">4</div>
+        <div class="msg">Page Not Found <p>You will redirect to home page.</p>
+        </div>
+        <script>
+            const frontendRootUrl = window.env.REACT_APP_FRONTEND_ROOT;
+            setTimeout(function () {
+                window.location.href = frontendRootUrl;
+            }, 3000);
+        </script>
+    </div>
+</body>
+
+</html>

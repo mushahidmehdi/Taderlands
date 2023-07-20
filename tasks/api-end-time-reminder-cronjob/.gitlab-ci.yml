@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: api-end-time-reminder-cronjob
+  SERVICE_BASE_PATH: tasks/api-end-time-reminder-cronjob
+
+api-end-time-reminder-cronjob-docker:
+  extends: .dockerize
+
+api-end-time-reminder-cronjob-deploy:
+  extends: .aws

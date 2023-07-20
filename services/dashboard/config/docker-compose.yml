@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+    dashboard:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-dashboard:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: dashboard
+            NODE_ENV: ${AWS_ENV} 
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            FRONTEND_URL : https://www${CLUSTER_DOMAIN_POSTFIX2}
+            BACKEND_URL: http://${MASTER_IP}
+            IYZICO_ENDPOINT: https://sandbox-api.iyzipay.com
+            TWO_FACTOR_AUTHENTICATION_APP_NAME: Traderlands
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            BALANCE_REFRESH_INTERVAL_MINUTES: 5
+            STORY_DEFAULT_DAYS_COUNT: 3
+            SERVICE_TAGS: "\
+                backend,api,dashboard,\
+                traefik.enable=true,\
+                traefik.http.middlewares.dashboard-strip.stripPrefix.prefixes=/api/dashboard,\
+                traefik.http.routers.dashboard-backend.entrypoints=websecure,\
+                traefik.http.routers.dashboard-backend.rule=PathPrefix(`/api/dashboard`),\
+                traefik.http.routers.dashboard-backend.middlewares=dashboard-strip\\,jwt-auth,\
+                traefik.http.routers.dashboard-backend.tls=true"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ID/Others</title>
+    <g id="ID/Others" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" stroke="orange">
+            <ellipse stroke="#000" id="Oval" fill="#FFFFFF" cx="21.9767687" cy="21.97705" rx="21.4767687" ry="21.47705"></ellipse>
+            <line x1="5.13410771" y1="9.19969533" x2="39.0982049" y2="9.19969533" id="Path-2"></line>
+            <line x1="0.0464625132" y1="21.4659558" x2="43.9999985" y2="21.4774531" id="Path-3"></line>
+            <line x1="5.33818056" y1="33.386725" x2="39.2815877" y2="34.572055" id="Path-4" stroke-linecap="round" transform="translate(22.309884, 33.979390) rotate(-2.000000) translate(-22.309884, -33.979390) "></line>
+            <path d="M19.5957866,0.929262155 C12.3646045,5.64742605 8.74901351,12.9768603 8.74901351,22.917565 C8.74901351,32.8582697 12.7973657,39.5142311 20.8940702,42.8854494" id="Path-5" stroke-linecap="round"></path>
+            <path d="M32.5810031,0.929262155 C25.349821,5.64742605 21.73423,12.9768603 21.73423,22.917565 C21.73423,32.8582697 25.7825822,39.5142311 33.8792867,42.8854494" id="Path-5-Copy" stroke-linecap="round" transform="translate(27.806758, 21.907356) scale(-1, 1) translate(-27.806758, -21.907356) "></path>
+            <polyline id="Path-7" points="21.3662423 1.04541992 21.4371156 14.8878124 21.5861704 44"></polyline>
+        </g>
+    </g>
+</svg>

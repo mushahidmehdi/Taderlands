@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    sms-sender:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-sms-sender:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: sms-sender
+            DEBUG: 0
+            FLASK_ENV: production
+            SERVICE_TAGS: backend,aws,sms
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            AWS_REGION: ${AWS_REGION}
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433

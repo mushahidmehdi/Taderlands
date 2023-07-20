@@ -1,0 +1,4 @@
+node_modules
+.env
+paratica-common
+.DS_Store

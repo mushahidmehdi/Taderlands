@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    kyc:
+        ports:
+            - 0:80
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: kyc-${AWS_ENV}
+                awslogs-stream-prefix: paratica

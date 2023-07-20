@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: marketplace
+  SERVICE_BASE_PATH: services/marketplace
+
+marketplace-docker:
+  extends: .dockerize
+
+marketplace-deploy:
+  extends: .aws

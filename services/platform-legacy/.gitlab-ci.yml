@@ -1,0 +1,9 @@
+stages:
+  - deploy
+
+variables:
+  SERVICE_NAME: platform-legacy
+  SERVICE_BASE_PATH: services/platform-legacy
+
+platform-legacy-deploy:
+  extends: .aws

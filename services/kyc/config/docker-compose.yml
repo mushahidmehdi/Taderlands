@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+    kyc:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-kyc:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: kyc
+            REACT_APP_API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            REACT_APP_FRONTEND_ROOT: https://app${CLUSTER_DOMAIN_POSTFIX}
+            SERVICE_TAGS: "\
+                kyc,\
+                traefik.enable=true,\
+                traefik.http.middlewares.kyc-redirect.redirectScheme.scheme=https,\
+                traefik.http.middlewares.kyc-redirect.redirectScheme.permanent=true,\
+                traefik.http.routers.kyc.entrypoints=web,\
+                traefik.http.routers.kyc.rule=Host(`kyc${CLUSTER_DOMAIN_POSTFIX}`)||Host(`kyc${CLUSTER_DOMAIN_POSTFIX2}`),\
+                traefik.http.routers.kyc.middlewares=kyc-redirect,\
+                traefik.http.routers.kyc-secure.entrypoints=websecure,\
+                traefik.http.routers.kyc-secure.rule=Host(`kyc${CLUSTER_DOMAIN_POSTFIX}`)||Host(`kyc${CLUSTER_DOMAIN_POSTFIX2}`),\
+                traefik.http.routers.kyc-secure.tls=true"
+                

@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+    platform:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-platform:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: platform
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            KEYCLOAK_BASE_URL: https://${CLUSTER_DOMAIN}/auth
+            KEYCLOAK_REALM: paratica
+            KEYCLOAK_ADMIN_CLIENT_ID: paratica-backend
+            KEYCLOAK_CLIENT_ID: paratica-rest
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            SERVICE_TAGS: "\
+                backend,api,platform,\
+                traefik.enable=true,\
+                traefik.http.middlewares.platform-strip.stripPrefix.prefixes=/api/platform,\
+                traefik.http.routers.platform.entrypoints=websecure,\
+                traefik.http.routers.platform.rule=PathPrefix(`/api/platform`),\
+                traefik.http.routers.platform.middlewares=platform-strip\\,jwt-auth,\
+                traefik.http.routers.platform.tls=true,\
+                traefik.http.middlewares.platform-internal-strip.stripPrefix.prefixes=/api/internal/platform,\
+                traefik.http.routers.platform-internal.entrypoints=web,\
+                traefik.http.routers.platform-internal.rule=PathPrefix(`/api/internal/platform`)&&Host(`${MASTER_IP}`),\
+                traefik.http.routers.platform-internal.middlewares=platform-internal-strip"

@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: kyc-status-updater-cronjob
+  SERVICE_BASE_PATH: tasks/kyc-status-updater-cronjob
+
+kyc-status-updater-cronjob-docker:
+  extends: .dockerize
+
+kyc-status-updater-cronjob-deploy:
+  extends: .aws

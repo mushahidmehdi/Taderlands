@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: platform
+  SERVICE_BASE_PATH: services/platform
+
+platform-docker:
+  extends: .dockerize
+
+platform-deploy:
+  extends: .aws

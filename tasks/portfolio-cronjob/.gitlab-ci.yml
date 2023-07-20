@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: portfolio-cronjob
+  SERVICE_BASE_PATH: tasks/portfolio-cronjob
+
+portfolio-cronjob-docker:
+  extends: .dockerize
+
+portfolio-cronjob-deploy:
+  extends: .aws

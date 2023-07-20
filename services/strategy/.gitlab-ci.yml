@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: strategy
+  SERVICE_BASE_PATH: services/strategy
+
+strategy-docker:
+  extends: .dockerize
+
+strategy-deploy:
+  extends: .aws

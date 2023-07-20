@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    marketplace:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-marketplace:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: marketplace
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            SERVICE_TAGS: "\
+                backend,api,marketplace,\
+                traefik.enable=true,\
+                traefik.http.middlewares.marketplace-strip.stripPrefix.prefixes=/api/marketplace,\
+                traefik.http.routers.marketplace.entrypoints=websecure,\
+                traefik.http.routers.marketplace.rule=PathPrefix(`/api/marketplace`),\
+                traefik.http.routers.marketplace.middlewares=marketplace-strip\\,jwt-auth,\
+                traefik.http.routers.marketplace.tls=true"

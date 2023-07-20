@@ -1,0 +1,31 @@
+{
+  "name": "@paratica/api-end-time-reminder-cronjob",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "env-cmd node .",
+    "debug": "nodemon --exec env-cmd node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@backend/common": "file:../../common",
+    "@koa/cors": "^3.2.0",
+    "@paratica/common": "file:../../../common",
+    "@prisma/client": "^4.8.0",
+    "dayjs": "^1.11.7",
+    "mustache": "^4.2.0",
+    "amqp-connection-manager": "^4.1.2",
+    "amqplib": "^0.10.3"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "prisma": "^4.8.0"
+  }
+}

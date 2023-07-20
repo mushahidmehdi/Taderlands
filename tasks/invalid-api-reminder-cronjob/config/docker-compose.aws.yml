@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    invalid-api-reminder-cronjob:
+        ports:
+            - 0:3000
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: invalid-api-reminder-cronjob-${AWS_ENV}
+                awslogs-stream-prefix: paratica

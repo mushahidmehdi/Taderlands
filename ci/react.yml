@@ -1,0 +1,46 @@
+.build:
+  stage: build
+  image: node:18-alpine
+  cache:
+    <<: *cache
+  script:
+    - echo "Building $SERVICE_NAME"
+    - cp ci/.npmrc $SERVICE_BASE_PATH || true
+    - cd $SERVICE_BASE_PATH
+    - if [ -f "build.env" ]; then export $(grep -v '^#' build.env | xargs); fi
+    - export VERSION=$(node -p "require('./package.json').version")
+    - echo "Building $VERSION ..."
+    - >
+      export SRC_SHA1=$(
+      find . -type f 
+      -not -path "./node_modules/*" 
+      -not -path "./build*" 
+      -print0 | sort -z | xargs -0 sha1sum | 
+      sha1sum | awk '{print $1}')
+    - echo "Current $SRC_SHA1"
+    - echo "Old     $SHA1"
+    - echo $FORCE_BUILD
+    - |
+      if [ ! -z "$FORCE_BUILD" ] || [ ! -d "./build" ] || [ "$SHA1" != "$SRC_SHA1" ]; then
+        if [ "$CI_COMMIT_BRANCH" == "master" ]; then 
+          cp .env.production.build .env.production || true
+        else 
+          cp .env.staging.build .env.production || true
+        fi
+        npm install
+        CI=false npm run build
+        find ./build -name "*.map" -type f -delete
+
+        if [ "$CI_COMMIT_BRANCH" != "master" ]; then
+          find ./build -name "robots.txt" -type f -delete
+          find ./build -name "sitemap.xml" -type f -delete
+        fi
+        echo "SHA1=$SRC_SHA1" > build.env
+        echo "VERSION=$VERSION" >> build.env
+      else
+        echo "No changes are detected, skipping build"
+      fi
+  rules:
+    - *push-rule
+    - *web-rule
+

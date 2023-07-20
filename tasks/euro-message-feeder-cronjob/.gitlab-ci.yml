@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: euro-message-feeder-cronjob
+  SERVICE_BASE_PATH: tasks/euro-message-feeder-cronjob
+
+euro-message-feeder-cronjob-docker:
+  extends: .dockerize
+
+euro-message-feeder-cronjob-deploy:
+  extends: .aws

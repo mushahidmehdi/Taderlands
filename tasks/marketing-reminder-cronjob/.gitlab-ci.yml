@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: marketing-reminder-cronjob
+  SERVICE_BASE_PATH: tasks/marketing-reminder-cronjob
+
+marketing-reminder-cronjob-docker:
+  extends: .dockerize
+
+marketing-reminder-cronjob-deploy:
+  extends: .aws

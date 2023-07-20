@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>RKYC Web Card Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<script src="./assets/js/tf-automl.min.js"></script>-->
+  <script defer src="./assets/js/axios-1.2.1.js"></script>
+  <script src="./assets/js/config.js"></script>
+  <!--<script src="./assets/js/window.js"></script>-->
+  <script src="../config.js"></script>
+  <script src="./assets/js/techsign-card-detection.js"></script>
+  <link rel="stylesheet" href="./assets/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/main.css">
+  <link rel="shortcut icon" href="./assets/images/fav_32.png">
+  <link rel="preload" crossorigin="anonymous" as="fetch" href="./assets/model/model.json">
+  <link rel="preload" crossorigin="anonymous" as="fetch" href="./assets/model/group1-shard1of2.bin">
+  <link rel="preload" crossorigin="anonymous" as="fetch" href="./assets/model/group1-shard2of2.bin">
+  <link rel="preload" crossorigin="anonymous" as="fetch" href="./assets/model/blur/model.json">
+  <link rel="preload" crossorigin="anonymous" as="fetch" href="./assets/model/blur/group1-shard1of1.bin">
+</head>
+
+<body>
+  <script>
+    let detectCardNow;
+    detectCardNow = new detectCard({
+      debug: false,
+      lang: 'en',
+    });
+
+
+    /*
+        detectCardNow.onCapturedSuccess = function (image, blobImage, imgObject) {
+          $('.spinner').hide();
+          console.log(image);
+          console.log(blobImage);
+          console.log(imgObject);
+        };
+
+        detectCardNow.onReadyCapture = function () {
+          console.log("ready to capture");
+        };
+        
+        detectCardNow.onGetResult = function (result) {
+          console.log(result);
+        };
+
+        detectCardNow.waitingForCamera = function () {
+          console.log("waiting for camera");
+        };
+    */
+    window.onload = async function () { 
+      detectCardNow.domain = window.env.REACT_APP_API_ROOT+"/payment/kyc/proxy"
+      
+    };
+  </script>
+  <script async src="./assets/js/ffmpeg-all-codecs.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+    euro-message-feeder-cronjob:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-euro-message-feeder-cronjob:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: euro-message-feeder-cronjob
+            NODE_ENV: ${AWS_ENV}
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            BACKEND_URL: http://${MASTER_IP}
+            EURO_MESSAGE_API_BASE_URL: https://api.relateddigital.com/restm/api
+            UPDATE_USER_LIST_FREQUENCY: 7
+            SERVICE_TAGS: backend,api,euro-message-feeder-cronjob

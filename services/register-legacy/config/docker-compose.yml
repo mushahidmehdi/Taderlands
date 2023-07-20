@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  register:
+    image: ${CI_REGISTRY_IMAGE:-paratica}/service-register:legacy
+    environment:
+      SERVICE_NAME: register-legacy
+      NODE_ENV: ${AWS_ENV}
+      REDIS_HOST: $MASTER_IP
+      REDIS_PORT: 6380
+      WAIT_HOSTS: ${DB_IP}:5433
+      WAIT_SLEEP_INTERVAL: 10
+      WAIT_HOSTS_TIMEOUT: 120
+      KEYCLOAK_BASE_URL: https://aws-staging.paratica.com/auth
+      KEYCLOAK_REALM: paratica
+      KEYCLOAK_ADMIN_CLIENT_ID: paratica-backend
+      KEYCLOAK_CLIENT_ID: paratica-rest
+      DB_HOST: ${DB_IP}
+      DB_PORT: 5433
+      SERVICE_TAGS: "\
+        backend,api,register,legacy,\
+        traefik.enable=true,\
+        traefik.http.middlewares.register-legacy-strip.stripPrefix.prefixes=/api/legacy/register,\
+        traefik.http.routers.register-legacy.entrypoints=websecure,\
+        traefik.http.routers.register-legacy.rule=PathPrefix(`/api/legacy/register`),\
+        traefik.http.routers.register-legacy.middlewares=register-legacy-strip,\
+        traefik.http.routers.register-legacy.tls=true"

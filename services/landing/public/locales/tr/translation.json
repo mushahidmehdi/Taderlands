@@ -1,0 +1,104 @@
+{
+	"lang": "Turkish",
+	"Home": "Ev",
+	"Features": "Özellikleri",
+	"Blog": "Blog",
+	"About Us": "Hakkımızda",
+	"FAQ": "FAQ",
+
+	"strategyTitle": "Stratejinizi Traderlands Pazaryerinde Yayınlayın",
+	"strategyP1": "Stratejinizi oluşturun, backtest uygulayın ve stratejinizi Traderlands pazaryerinde listelemek için Strateji Tasarımcı Başvurusu yapın.",
+	"strategyP2": "Başvurunuz onaylandığında, tasarladığınız strateji Traderlands Pazaryerinde Stratejiniz listelenir ve diğer kullanıcılar tarafından kullanılabilir duruma gelir.",
+
+	"marketplace": "Strateji Pazaryeri",
+	"marketplaceP1": "Trade yaklaşımınıza uyan stratejileri kolayca bulmak için Traderlands Pazaryerinde filtreleyerek arama yapın.",
+	"marketplaceP2": " Farklı piyasa koşullarına göre tasarlanmış, ayı ve boğa piyasalarına göre adapte edilmiş olan stratejileri kolayca filtreleyerek size uygun olanları  hızlıca kullanmaya başlayın.",
+	"marketplaceP3": "Size uygun olan stratejileri seçmenize yardımcı olabilmek için pazaryerinde yer alan tüm stratejilerin geçmişe dönük backtest sonuçları ve gerçek zamanlı performans istatistikleri yer alır.",
+
+	"mainTitle": "Algoritmalar ile trade dünyasıyla tanışın. Portföyünüzü botlarla kolayca ve güvenle yönetin.",
+	"mainSubHeading": "Algoritmik trade serüvenine önde gelen borsalarda çalışan, backtest ile sonuçları analiz edilmiş stratejileri kullanarak ya da kolayca kendi stratejinizi tasarlayarak başlayın.",
+
+	"getStart": "Get Started",
+	"watchTutorials": "Watch Tutorials",
+
+	"strategyCreators": "Algoritmik alım-satım \n herkes için kolaylaştırıldı.",
+	"strategyCreatorsText": "Tek satır kod yazmadan, kullanımı kolay bir sosyal alım-satım platformu. \n Strateji tasarımcısı ile kural gruplarını birleştirerek strateji yaratabilir \n ya da pazaryerinde size uygun stratejileri kolayca kullanmaya başlayabilirsiniz.",
+	"invest_1_backtest": "Gerçek zamanlı alım-satımlara başlamadan önce stratejinizi doğrulamak için geçmiş verileri baz alarak test edin.\n\nTrade stratejinizi içgüdüsel hisler, söylentiler veya başkalarının neler düşündüğü ile şekillendirmek yerine backtest uygulayarak veriler ile doğrulayın.",
+	"invest_1_indicators": "Stratejinizi oluştururken kullanabileceğiniz ve bir kural grubu ile birbirlerine bağlayarak strateji tasarlayabileceğiniz çok sayıda indikatör Traderlands Atölye’sinde yer almaktadır.\n\nStratejinizi piyasalarda 7/24 çalışan robotlara dönüştürmek için bütün işi Traderlands’e bırakın.\n\nSizin için Strateji Oluşturma Aracına sürekli olarak yeni indikatörler ekleyerek işinizi kolaylaştırıyoruz.\n\nİndikatörleri kullanın, stratejinizi tasarlayın ve piyasa koşulları trade stratejinize uygun olduğunda bir işlemi asla kaçırmayın.",
+	"invest_1_no_code_bots": "Kod yazma gereksinimi olmayan Strateji Oluşturma Aracı, alım-satım stratejisi oluşturanların kendi trade botlarını kolaylıkla tasarlamalarına olanak tanır.\n\nİndikatörlere dayalı olarak oluşturulmuş herhangi bir stratejiyi borsalarda 7/24 işlem yapan bir trade botuna dönüştürün.\n\nBaşlamak için yazılımcı olmanıza gerek yok!",
+
+	"algorithmicTrading": "Algoritmik alım-satım \n herkes için kolaylaştırıldı.",
+	"invest_0_easy_to_use": "Bir kaç tıkla kolayca ücretsiz üye olun, kullanmak istediğiniz borsa hesaplarınıza ait API’ları bağlayın ve backtestleri yapılmış olan stratejiler arasından size en uygun olanlarını seçerek kullanmaya başlayın.",
+
+	"invest_0_social_trading": "Strateji tasarımcıları tarafından oluşturulmuş, yayınlanmadan önce backtest ile geçmişe dönük test edilmiş olan, farklı piyasa koşullarına göre tasarlanmış ve tüm seviyedeki kullanıcılar için kullanılabilir trade stratejileri Traderlands Pazaryerinde!\n\nİstek ve beklentilerinize göre pazaryerindeki stratejileri filtreleyerek arayabilir ve hızlıca kullanmaya başlayabilirsiniz.",
+
+	"invest_0_customized_bots": "Risk yönetim tercihinize göre strateji tasarımcıları tarafından oluşturulmuş trade stratejilerini yapılandırın ve kendiniz için yeniden oluşturarak sizin için 7/24 çalışan trade botlarını kullanın.",
+
+	"invest_0_win_to_share": "Traderlands market runs on  \"Earn and Share\" By profiting from a strategy, the creator is rewarded with the credits consumed, if you don't profit then you pay nothing thus creating a win-win situation for everyone involved. \n\n As a community thrives on shared success, spread the love! Join the community, grow through trade, and experience the power of collective prosperity!",
+
+	"howitwork": "Nasıl Çalışır?",
+	"howitworkP1": "Traderlands is the platform where you can find hundreds of tools to manage your portfolio efficiently.",
+
+	"strategyCreatorTool": "Strateji Tasarım Atölyesi",
+
+	"noCodeNeeded": "Kod Gerekmez",
+	"noCodeNeededP1": "Dakikalar içinde trade stratejileri oluşturmak için çok kullanılan teknik analiz indikatörleri ve temel analiz verileri ile donatılmış Traderlands strateji oluşturma atölyesini kullanın.",
+	"noCodeNeededP2": " Önceden TradingView üzerinde tasarladığınız bir strateji varsa, kolayca Traderlands hesabınıza bağlayın.",
+	"noCodeNeededP3": "Stratejinizi oluşturduktan sonra backtest uygulayın ya da dilerseniz sanal trade ile stratejinizi çalıştırarak gerçek zamanlı olarak performansını ölçün.",
+
+	"mobileApp": "Mobile App",
+	"mobileAppP1": "Traderlands Android ve IOS mobil uygulamaları, algoritmik trade'in gücünü kullanarak robotlar ile portföyünüzü yönetmenizi sağlar. Deneyimli ya da yeni başlayan her trader, Traderlands uygulaması sayesinde işlemlerini kolayca yönetebilir ve portföyünü takip edebilir.",
+	"mobileAppP2": "Traderlands Pazaryeri'nde bulunan stratejileri kullanarak algoritmalar ile trade yapmaya başlayabilirsiniz. Mobil cihazınızda anlık bildirimlerle 7/24 açık piyasada robotlarla açılan pozisyonlarınızı kolayca takip edebilirsiniz.",
+	"mobileAppP3": "Hemen Traderlands uygulamasını indirin ve algoritmalar ile trade yapmanın gücünü keşfedin.",
+
+	"tradingCommunity": "Trade topluluğunun bir parçası olun!",
+	"tradingCommunityP1": "Traderlands ile borsalarda işlem yapmak sosyal hale gelir. Yolculuğunuzda asla yalnız hissetmeyin.",
+	"tradingCommunityP2": "Platformumuzda yer alan Hikayeler bölümünde en son piyasa haberlerini okuyun ve strateji tasarlayanlarla etkileşim kurun.",
+	"tradingCommunityP3": "Sadece işlemleri otomatikleştiren bir platform olmanın çok ötesinde, Traderlands dünyanın farklı yerlerindeki insanların bağlantı kurabileceği ve trade deneyimlerini paylaşabileceği bir platform.",
+
+	"socialTradingCommunity": "Trade Topluluğu Oluşturun",
+	"socialTradingCommunityP1": "Traderlands trade serüvenini sosyal hale getirir. Stratejinizi pazaryerinde yayınlayın, stratejiniz için bir topluluk oluşturun, daha fazla kullanıcıya ulaşın, onlarla etkileşime geçin ve stratejinizin kullanımını arttırın.",
+
+	"riskManagement": "Portföy Yönetimi",
+	"riskManagementP1": "Traderlands Pazaryerinde yer alan strateji tasarımcıları tarafından oluşturulmuş olan stratejileri kullanırken kendi risk algınıza göre hareket ederek güvende kalın.",
+	"riskManagementP2": "Birden fazla stratejiyi aynı anda kullanırken, her birine özel Stop-Loss, Take Profit ve Pozisyon Büyüklüğü gibi ayarları kolayca yaparak risk yönetimi ile toplam bütçenizi rahatça kontrol edin.",
+	"riskManagementP3": "",
+
+	"creditCard": "Adil Kredi Kullanım Sistemi",
+	"creditCardP1": "Ücretsiz üye olun, size uygun stratejileri seçin ve sadece başarılı oldukça hesabınızdaki kredileri kullanarak botları çalıştırmaya devam edin.",
+	"creditCardP2": "Ön maliyet riskini almadan, önce başarın, portföyünüzü otomatik olarak yönetin.",
+	"cookieH": "Gizliliğiniz - Sizin Tercihiniz!",
+	"cookieP": "Size daha iyi bir kullanım deneyimi sunabilmek için yasal düzenlemelere uygun şekilde tarayıcı çerezlerini (cookies) kullanıyoruz. ",
+	"cookieP2": "Çerez politikası",
+	"cookieP3": " sayfamız üzerinden detaylı bilgi edinebilirinsiz.",
+	"accept": "Hepsini kabul et",
+	"settings": "Özelleştirme",
+	"customH": "Çerez Ayaları",
+	"customP": "Çerezler, internet sitemizi ziyaret ettiğinizde bilgisayarınıza ya da mobil cihazınıza kaydedilen küçük metin dosyalarıdır. Sitemizin güvenli bir şekilde çalışmasını sağlamak, kullanıcılarımıza canlı destek hizmeti sağlamak, sitemizde gezinmenizi ve sitemizdeki hizmet ve özelliklerden yararlanmanızı sağlamak, sizlere daha iyi bir deneyim sunmak ve hizmetlerimizi size uygun olarak iyileştirmek ve sitemizin performansını artırmak ve internet sitemizi daha kullanıcı dostu hale getirmek amaçları ile tarayıcı çerezlerini kullanmaktayız. \n",
+	"customP2": "Çerez Politikası",
+	"customP3": "nı incele",
+	"mandatory": "Gerekli (Zorunlu Çerezler)",
+	"preference": "Tercih ve İşlevsellik Çerezleri",
+	"analytics": "Analitik Çerezler",
+	"save": "Kaydet",
+
+	"toggle_user": "Kullanıcı",
+	"toggle_user_1": "Kullanıcı",
+	"toggle_creator": "Tasarımcı",
+	"toggle_creator_1": "Tasarımcı",
+
+	"expert_navigation_backtest": "Backtest",
+	"expert_navigation_indicators": "İndikatörler",
+	"expert_navigation_no_code_bots": "Kod yazmadan Bot oluşturun",
+	"expert_navigation_win_to_share": "Win2Share",
+
+	"strategy_navigation_easy_to_use": "Kullanım Kolaylığı",
+	"strategy_navigation_social_trading": "Sosyal Trade",
+	"strategy_navigation_customized_bots": "Kişiselleştirilmiş Botlar",
+	"strategy_navigation_customized_win_to_share": "Win2Share",
+
+	"user_agreement": "Kullanıcı Sözleşmesi",
+	"privacy_policy": "Gizlilik Sözleşmesi",
+	"cookies_policy": "Çerez Politikası",
+	"aml_policy": "AML - KYC Politikası"
+}

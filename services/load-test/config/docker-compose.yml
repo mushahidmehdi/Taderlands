@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+    load-test:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-load-test:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: load-test
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${TEST_DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            KEYCLOAK_BASE_URL: https://${CLUSTER_DOMAIN}/auth
+            KEYCLOAK_REALM: paratica
+            KEYCLOAK_ADMIN_CLIENT_ID: paratica-backend
+            KEYCLOAK_CLIENT_ID: paratica-rest
+            DB_HOST: ${TEST_DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            SERVICE_TAGS: "\
+                backend,api,load-test"

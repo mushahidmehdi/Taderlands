@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: position
+  SERVICE_BASE_PATH: services/position
+
+position-docker:
+  extends: .dockerize
+
+position-deploy:
+  extends: .aws

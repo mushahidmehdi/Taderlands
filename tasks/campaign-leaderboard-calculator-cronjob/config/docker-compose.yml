@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+    campaign-leaderboard-calculator-cronjob:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-campaign-leaderboard-calculator-cronjob:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: campaign-leaderboard-calculator-cronjob
+            NODE_ENV: ${AWS_ENV}
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            API_ROOT: https://aws${CLUSTER_DOMAIN_POSTFIX}/api
+            BACKEND_URL: http://${MASTER_IP}
+            ACTIVE_CAMPAIGN_API_BASE_URL: https://paratica.api-us1.com/api/3
+            UPDATE_USER_FIELD_FREQUENCY: 7
+            SERVICE_TAGS: backend,api,campaign-leaderboard-calculator-cronjob

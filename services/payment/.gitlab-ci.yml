@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: payment
+  SERVICE_BASE_PATH: services/payment
+
+payment-docker:
+  extends: .dockerize
+
+payment-deploy:
+  extends: .aws

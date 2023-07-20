@@ -1,0 +1,14 @@
+const STATUS_TYPES = {
+	INITIALIZE: "INITIALIZE",
+	PENDING: "PENDING",
+	DONE: "DONE",
+	ERROR: "ERROR",
+	INSUFFICIENT: "INSUFFICIENT",
+};
+
+const TYPES = {
+	REAL: "REAL",
+	BONUS: "BONUS",
+};
+
+module.exports = { STATUS_TYPES, TYPES };

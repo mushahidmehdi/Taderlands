@@ -1,0 +1,28 @@
+{
+  "name": "@paratica/portfolio-cronjob",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "env-cmd node .",
+    "debug": "nodemon --exec env-cmd node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@backend/common": "file:../../common",
+    "@paratica/common": "file:../../../common",
+    "@prisma/client": "^4.8.0",
+    "aws-sdk": "^2.1036.0",
+    "axios": "^0.27.2"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "prisma": "^4.8.0"
+  }
+}

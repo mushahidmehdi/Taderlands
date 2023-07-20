@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+    user:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-user:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: user
+            NODE_ENV: ${AWS_ENV}
+            MASTER_IP: $MASTER_IP
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            KEYCLOAK_BASE_URL: https://aws${CLUSTER_DOMAIN_POSTFIX}/auth 
+            KEYCLOAK_REALM: paratica
+            KEYCLOAK_ADMIN_CLIENT_ID: paratica-backend
+            KEYCLOAK_CLIENT_ID: paratica-rest
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            TWO_FACTOR_AUTHENTICATION_APP_NAME: Traderlands
+            FRONTEND_URL: https://app${CLUSTER_DOMAIN_POSTFIX2}
+            SERVICE_TAGS: "\
+                backend,api,user,\
+                traefik.enable=true,\
+                traefik.http.middlewares.user-strip.stripPrefix.prefixes=/api/user,\
+                traefik.http.routers.user.entrypoints=websecure,\
+                traefik.http.routers.user.rule=PathPrefix(`/api/user`),\
+                traefik.http.routers.user.middlewares=user-strip\\,jwt-auth,\
+                traefik.http.routers.user.tls=true,\
+                traefik.http.middlewares.user-internal-strip.stripPrefix.prefixes=/api/internal/user,\
+                traefik.http.routers.user-internal.entrypoints=web,\
+                traefik.http.routers.user-internal.rule=PathPrefix(`/api/internal/user`)&&Host(`${MASTER_IP}`),\
+                traefik.http.routers.user-internal.middlewares=user-internal-strip"

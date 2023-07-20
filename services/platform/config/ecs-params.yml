@@ -1,0 +1,38 @@
+version: 1
+task_definition:
+  task_execution_role: "arn:aws:iam::945946495384:role/ecsTaskExecutionRole"
+  task_role_arn: "arn:aws:iam::945946495384:role/ecsTaskLambdaInvokerRole"
+
+  services:
+    platform:
+      essential: true
+      mem_reservation: 64M
+      secrets:
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/redis-pass"
+          name: REDIS_PASS
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/timescale-user"
+          name: DB_USER
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/timescale-pass"
+          name: DB_PASS
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/keycloak/admin-client-secret"
+          name: KEYCLOAK_ADMIN_CLIENT_SECRET
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/timescale/secret-key"
+          name: DB_SECRET_KEY
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/mq/user"
+          name: RABBITMQ_USER
+        - value_from: "arn:aws:ssm:eu-central-1:945946495384:parameter/${AWS_ENV}/mq/pass"
+          name: RABBITMQ_PASS
+
+
+  placement_constraints:
+    - type: memberOf
+      expression: attribute:purpose == backend
+
+run_params:
+  task_placement:
+    strategy:
+      - field: instanceId
+        type: spread
+    constraint:
+      - type: memberOf
+        expression: attribute:purpose == backend

@@ -1,0 +1,7 @@
+**/.git
+**/node_modules
+**/generated
+.env
+.env.*
+Dockerfile
+docker-compose.yml

@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: invalid-api-reminder-cronjob
+  SERVICE_BASE_PATH: tasks/invalid-api-reminder-cronjob
+
+invalid-api-reminder-cronjob-docker:
+  extends: .dockerize
+
+invalid-api-reminder-cronjob-deploy:
+  extends: .aws

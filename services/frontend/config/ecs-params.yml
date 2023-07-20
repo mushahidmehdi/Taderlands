@@ -1,0 +1,21 @@
+version: 1
+task_definition:
+  task_execution_role: "arn:aws:iam::945946495384:role/ecsTaskExecutionRole"
+
+  services:
+    frontend:
+      essential: true
+      mem_reservation: 64M
+
+  placement_constraints:
+    - type: memberOf
+      expression: attribute:purpose == backend
+
+run_params:
+  task_placement:
+    strategy:
+      - field: instanceId
+        type: spread
+    constraint:
+      - type: memberOf
+        expression: attribute:purpose == backend

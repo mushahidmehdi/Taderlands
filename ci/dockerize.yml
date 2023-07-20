@@ -1,0 +1,54 @@
+.dockerize:
+  stage: dockerize
+  image: docker:19.03.12
+  cache:
+    <<: *cache
+    policy: pull
+  services:
+    - docker:19.03.8-dind
+  before_script:
+    - apk add git
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - cd $SERVICE_BASE_PATH
+    - if [ "$CI_COMMIT_BRANCH" == "master" ]; then export COMMON_BRANCH=main; else export COMMON_BRANCH=develop; fi;
+    - echo "$COMMON_BRANCH will be used for cloning common..."
+    - git clone -b $COMMON_BRANCH https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/paratica/common.git ./paratica-common
+  variables:
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_DRIVER: overlay2
+  script:
+    - export TASK_TYPE=${TASK_TYPE:-$TASK_TYPE_DEFAULT}
+    - export IMAGE_TAG=$CI_REGISTRY_IMAGE/$TASK_TYPE-$SERVICE_NAME
+    - echo "Building $SERVICE_NAME..."
+    - cp -R ../../common .
+    - if [ ! -f ".dockerignore" ]; then cp ../../build/.dockerignore .; fi
+    - if [ ! -f "Dockerfile" ]; then cp ../../build/Dockerfile .; fi
+    - if [ ! -f "docker-entrypoint.sh" ]; then cp ../../build/docker-entrypoint.sh .; fi
+    - if [ -f "build.env" ]; then export $(grep -v '^#' build.env | xargs); fi
+    - if [ "$CI_COMMIT_BRANCH" != "master" ] && [ -z "$FORCE_VERSION" ]; then export VERSION=staging ; fi
+    - docker pull $IMAGE_TAG:latest || true
+    - |
+      if [ -n "$VERSION" ]; then 
+        docker pull $IMAGE_TAG:$VERSION || true
+        docker build \
+          --tag $IMAGE_TAG:latest \
+          --tag $IMAGE_TAG:$VERSION \
+          --cache-from $IMAGE_TAG:latest \
+          .  
+        docker push $IMAGE_TAG:$VERSION
+      else 
+        docker build \
+          --tag $IMAGE_TAG:latest \
+          --cache-from $IMAGE_TAG:latest \
+          .  
+        docker push $IMAGE_TAG:latest
+      fi
+  rules:
+    - if: $PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH =~ /(master|develop)/
+      changes:
+        - $SERVICE_BASE_PATH/Dockerfile
+        - $SERVICE_BASE_PATH/docker-entrypoint.h
+    - *push-rule
+    - *web-rule
+

@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+    position:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-position:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: position
+            NODE_ENV: ${AWS_ENV}
+            REDIS_HOST: $INFRA_MAIN_IP
+            REDIS_PORT: 6380
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            ZERO_VALUE_USER_ID: 00000000-0000-0000-0000-000000000000
+            SERVICE_TAGS: "\
+                backend,api,position,\
+                traefik.enable=true,\
+                traefik.http.middlewares.position-strip.stripPrefix.prefixes=/api/position,\
+                traefik.http.routers.position.entrypoints=websecure,\
+                traefik.http.routers.position.rule=PathPrefix(`/api/position`),\
+                traefik.http.routers.position.middlewares=position-strip\\,jwt-auth,\
+                traefik.http.routers.position.tls=true"

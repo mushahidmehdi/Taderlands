@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    kyc-status-updater-cronjob:
+        ports:
+            - 0:3000
+        logging:
+            driver: "awslogs"
+            options:
+                awslogs-region: eu-central-1
+                awslogs-group: kyc-status-updater-cronjob-${AWS_ENV}
+                awslogs-stream-prefix: paratica

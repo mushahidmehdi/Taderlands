@@ -1,0 +1,16 @@
+const STATUS_TYPES = {
+	ON: "ON",
+	OFF: "OFF",
+	PENDING: "PENDING",
+	ACCEPTED: "ACCEPTED",
+	REJECTED: "REJECTED",
+	BANNED: "BANNED",
+	EXPIRED: "EXPIRED",
+	STANDBY: "STANDBY",
+	MAINTENANCE: "MAINTENANCE",
+	UNFOLLOWED: "UNFOLLOWED",
+};
+
+const LANGUAGE_SHORT_CODE_LIST = ["tr", "en", "fr", "de", "es", "it", "ru", "cn", "jp"];
+
+module.exports = { STATUS_TYPES, LANGUAGE_SHORT_CODE_LIST };

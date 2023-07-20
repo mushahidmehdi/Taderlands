@@ -1,0 +1,773 @@
+.web-rule: &web-rule
+  if: $CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_BRANCH =~ /(master|develop|feature|fix)/
+
+.web-rule-trigger: &web-rule-trigger
+  if: $CI_PIPELINE_SOURCE == "web" && $CI_COMMIT_BRANCH =~ /(master|develop|feature|fix)/
+  when: manual
+  allow_failure: true
+
+stages:
+  - prepare
+  - library
+  - microservice
+
+variables:
+  PIPELINE_SOURCE: $CI_PIPELINE_SOURCE
+  FORCE_BUILD: $FORCE_BUILD
+  TASK_TYPE_DEFAULT: service
+
+#######################
+#
+# preparation step for various technologies
+# enable the one that will be used
+#
+#######################
+
+###
+# For generic services
+
+generic-config:
+  image: alpine
+  stage: prepare
+  script:
+    - >
+      cat 
+      ci/generic-define.yml
+      ci/dockerize.yml
+      ci/aws.yml
+      > generic.yml
+  artifacts:
+    paths:
+      - generic.yml
+  rules:
+    - *web-rule
+    - if: $CI_COMMIT_BRANCH =~ /(master|develop)/
+      changes:
+        - services/**/config/*.yml
+        - services/**/Dockerfile
+        - services/**/.gitlab-ci.yml
+
+###
+# For Node based services
+
+node-config:
+  image: alpine
+  stage: prepare
+  script:
+    - >
+      cat 
+      ci/node-define.yml
+      ci/dockerize.yml
+      ci/aws.yml
+      > node.yml
+  artifacts:
+    paths:
+      - node.yml
+  rules:
+    - *web-rule
+    - if: $CI_COMMIT_BRANCH =~ /(master|develop)/
+      changes:
+        - services/**/config/*.yml
+        - services/**/*.js
+        - services/**/package*
+        - services/**/Dockerfile
+        - services/**/.gitlab-ci.yml
+
+###
+# For React based services
+
+react-config:
+  image: alpine
+  stage: prepare
+  script:
+    - >
+      cat 
+      ci/node-define.yml
+      ci/react.yml
+      ci/dockerize.yml
+      ci/aws.yml
+      > react.yml
+  artifacts:
+    paths:
+      - react.yml
+  rules:
+    - *web-rule
+    - if: $CI_COMMIT_BRANCH =~ /(master|develop)/
+      changes:
+        - services/frontend/**/config/*.yml
+        - services/frontend/**/*.js
+        - services/frontend/**/package*
+        - services/frontend/**/Dockerfile
+        - services/frontend/**/.gitlab-ci.yml
+
+###
+# For generic tasks
+
+generic-task-config:
+  image: alpine
+  stage: prepare
+  script:
+    - >
+      cat 
+      ci/generic-define.yml
+      ci/dockerize.yml
+      ci/aws-task.yml
+      > generic.yml
+  artifacts:
+    paths:
+      - generic.yml
+  rules:
+    - *web-rule
+    - if: $CI_COMMIT_BRANCH =~ /(master|develop)/
+      changes:
+        - tasks/**/config/*.yml
+        - tasks/**/Dockerfile
+        - tasks/**/.gitlab-ci.yml
+
+react-config-landing:
+  image: alpine
+  stage: prepare
+  script:
+    - >
+      cat 
+      ci/node-define.yml
+      ci/react.yml
+      ci/dockerize.yml
+      ci/aws.yml
+      > react.yml
+  artifacts:
+    paths:
+      - react.yml
+  rules:
+    - *web-rule
+    - if: $CI_COMMIT_BRANCH =~ /(master|develop)/
+      changes:
+        - services/landing/**/config/*.yml
+        - services/landing/**/*.js
+        - services/landing/**/package*
+        - services/landing/**/Dockerfile
+        - services/landing/**/.gitlab-ci.yml
+
+.master-rule: &master-rule
+  if: $CI_COMMIT_BRANCH == "master"
+  when: manual
+  allow_failure: true
+
+.develop-rule: &develop-rule
+  if: $CI_COMMIT_BRANCH == "develop"
+
+###
+# per service configurations
+
+register:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/register/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/register/config/**/*.yml
+        - services/register/**/*.js
+        - services/register/package*
+        - services/register/Dockerfile
+        - services/register/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/register/config/**/*.yml
+        - services/register/**/*.js
+        - services/register/package*
+        - services/register/Dockerfile
+        - services/register/.gitlab-ci.yml
+
+platform:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/platform/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/platform/config/**/*.yml
+        - services/platform/**/*.js
+        - services/platform/package*
+        - services/platform/Dockerfile
+        - services/platform/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/platform/config/**/*.yml
+        - services/platform/**/*.js
+        - services/platform/package*
+        - services/platform/Dockerfile
+        - services/platform/.gitlab-ci.yml
+
+marketplace:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/marketplace/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/marketplace/config/**/*.yml
+        - services/marketplace/**/*.js
+        - services/marketplace/package*
+        - services/marketplace/Dockerfile
+        - services/marketplace/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/marketplace/config/**/*.yml
+        - services/marketplace/**/*.js
+        - services/marketplace/package*
+        - services/marketplace/Dockerfile
+        - services/marketplace/.gitlab-ci.yml
+
+position:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/position/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/position/config/**/*.yml
+        - services/position/**/*.js
+        - services/position/package*
+        - services/position/Dockerfile
+        - services/position/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/position/config/**/*.yml
+        - services/position/**/*.js
+        - services/position/package*
+        - services/position/Dockerfile
+        - services/position/.gitlab-ci.yml
+
+user:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/user/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/user/config/**/*.yml
+        - services/user/**/*.js
+        - services/user/package*
+        - services/user/Dockerfile
+        - services/user/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/user/config/**/*.yml
+        - services/user/**/*.js
+        - services/user/package*
+        - services/user/Dockerfile
+        - services/user/.gitlab-ci.yml
+
+strategy:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/strategy/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/strategy/config/**/*.yml
+        - services/strategy/**/*.js
+        - services/strategy/package*
+        - services/strategy/Dockerfile
+        - services/strategy/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/strategy/config/**/*.yml
+        - services/strategy/**/*.js
+        - services/strategy/package*
+        - services/strategy/Dockerfile
+        - services/strategy/.gitlab-ci.yml
+
+dashboard:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/dashboard/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/dashboard/config/**/*.yml
+        - services/dashboard/**/*.js
+        - services/dashboard/package*
+        - services/dashboard/Dockerfile
+        - services/dashboard/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/dashboard/config/**/*.yml
+        - services/dashboard/**/*.js
+        - services/dashboard/package*
+        - services/dashboard/Dockerfile
+        - services/dashboard/.gitlab-ci.yml
+
+# register-legacy:
+#   stage: microservice
+#   trigger:
+#     include:
+#       - artifact: generic.yml
+#         job: generic-config
+#       - local: services/register-legacy/.gitlab-ci.yml
+#     strategy: depend
+#   rules:
+#     - *web-rule-trigger
+#     - <<: *master-rule
+#       changes:
+#         - services/register-legacy/config/**/*.yml
+#         - services/register-legacy/.gitlab-ci.yml
+#     - <<: *develop-rule
+#       changes:
+#         - services/register-legacy/config/**/*.yml
+#         - services/register-legacy/.gitlab-ci.yml
+
+# platform-legacy:
+#   stage: microservice
+#   trigger:
+#     include:
+#       - artifact: generic.yml
+#         job: generic-config
+#       - local: services/platform-legacy/.gitlab-ci.yml
+#     strategy: depend
+#   rules:
+#     - *web-rule-trigger
+#     - <<: *master-rule
+#       changes:
+#         - services/platform-legacy/config/**/*.yml
+#         - services/platform-legacy/.gitlab-ci.yml
+#     - <<: *develop-rule
+#       changes:
+#         - services/platform-legacy/config/**/*.yml
+#         - services/platform-legacy/.gitlab-ci.yml
+
+frontend:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: react.yml
+        job: react-config
+      - local: services/frontend/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/frontend/config/**/*.yml
+        - services/frontend/src/**/*
+        - services/frontend/package*
+        - services/frontend/Dockerfile
+        - services/frontend/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/frontend/config/**/*.yml
+        - services/frontend/src/**/*
+        - services/frontend/package*
+        - services/frontend/Dockerfile
+        - services/frontend/.gitlab-ci.yml
+
+landing:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: react.yml
+        job: react-config-landing
+      - local: services/landing/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/landing/config/**/*.yml
+        - services/landing/src/**/*
+        - services/landing/package*
+        - services/landing/Dockerfile
+        - services/landing/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/landing/config/**/*.yml
+        - services/landing/src/**/*
+        - services/landing/package*
+        - services/landing/Dockerfile
+        - services/landing/.gitlab-ci.yml
+
+backtest:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/backtest/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/backtest/config/**/*.yml
+        - services/backtest/**/*.js
+        - services/backtest/package*
+        - services/backtest/Dockerfile
+        - services/backtest/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/backtest/config/**/*.yml
+        - services/backtest/**/*.js
+        - services/backtest/package*
+        - services/backtest/Dockerfile
+        - services/backtest/.gitlab-ci.yml
+
+payment:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/payment/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/payment/config/**/*.yml
+        - services/payment/**/*.js
+        - services/payment/package*
+        - services/payment/Dockerfile
+        - services/payment/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/payment/config/**/*.yml
+        - services/payment/**/*.js
+        - services/payment/package*
+        - services/payment/Dockerfile
+        - services/payment/.gitlab-ci.yml
+
+load-test:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/load-test/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/load-test/config/**/*.yml
+        - services/load-test/**/*.js
+        - services/load-test/package*
+        - services/load-test/Dockerfile
+        - services/load-test/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/load-test/config/**/*.yml
+        - services/load-test/**/*.js
+        - services/load-test/package*
+        - services/load-test/Dockerfile
+        - services/load-test/.gitlab-ci.yml
+
+kyc:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/kyc/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/kyc/config/**/*.yml
+        - services/kyc/**/*.js
+        - services/kyc/package*
+        - services/kyc/Dockerfile
+        - services/kyc/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/kyc/config/**/*.yml
+        - services/kyc/**/*.js
+        - services/kyc/package*
+        - services/kyc/Dockerfile
+        - services/kyc/.gitlab-ci.yml
+
+portfolio-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/portfolio-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/portfolio-cronjob/config/**/*.yml
+        - tasks/portfolio-cronjob/**/*.js
+        - tasks/portfolio-cronjob/package*
+        - tasks/portfolio-cronjob/Dockerfile
+        - tasks/portfolio-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/portfolio-cronjob/config/**/*.yml
+        - tasks/portfolio-cronjob/**/*.js
+        - tasks/portfolio-cronjob/package*
+        - tasks/portfolio-cronjob/Dockerfile
+        - tasks/portfolio-cronjob/.gitlab-ci.yml
+
+refresh-mv-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/refresh-mv-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/refresh-mv-cronjob/config/**/*.yml
+        - tasks/refresh-mv-cronjob/**/*.js
+        - tasks/refresh-mv-cronjob/package*
+        - tasks/refresh-mv-cronjob/Dockerfile
+        - tasks/refresh-mv-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/refresh-mv-cronjob/config/**/*.yml
+        - tasks/refresh-mv-cronjob/**/*.js
+        - tasks/refresh-mv-cronjob/package*
+        - tasks/refresh-mv-cronjob/Dockerfile
+        - tasks/refresh-mv-cronjob/.gitlab-ci.yml
+
+sms-sender:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: node.yml
+        job: node-config
+      - local: services/sms-sender/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - services/sms-sender/config/**/*.yml
+        - services/sms-sender/**/*.js
+        - services/sms-sender/package*
+        - services/sms-sender/Dockerfile
+        - services/sms-sender/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - services/sms-sender/config/**/*.yml
+        - services/sms-sender/**/*.js
+        - services/sms-sender/package*
+        - services/sms-sender/Dockerfile
+        - services/sms-sender/.gitlab-ci.yml
+
+marketing-feeder-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/marketing-feeder-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/marketing-feeder-cronjob/config/**/*.yml
+        - tasks/marketing-feeder-cronjob/**/*.js
+        - tasks/marketing-feeder-cronjob/package*
+        - tasks/marketing-feeder-cronjob/Dockerfile
+        - tasks/marketing-feeder-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/marketing-feeder-cronjob/config/**/*.yml
+        - tasks/marketing-feeder-cronjob/**/*.js
+        - tasks/marketing-feeder-cronjob/package*
+        - tasks/marketing-feeder-cronjob/Dockerfile
+        - tasks/marketing-feeder-cronjob/.gitlab-ci.yml
+        
+api-end-time-reminder-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/api-end-time-reminder-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/api-end-time-reminder-cronjob/config/**/*.yml
+        - tasks/api-end-time-reminder-cronjob/**/*.js
+        - tasks/api-end-time-reminder-cronjob/package*
+        - tasks/api-end-time-reminder-cronjob/Dockerfile
+        - tasks/api-end-time-reminder-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/api-end-time-reminder-cronjob/config/**/*.yml
+        - tasks/api-end-time-reminder-cronjob/**/*.js
+        - tasks/api-end-time-reminder-cronjob/package*
+        - tasks/api-end-time-reminder-cronjob/Dockerfile
+        - tasks/api-end-time-reminder-cronjob/.gitlab-ci.yml
+
+kyc-status-updater-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/kyc-status-updater-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/kyc-status-updater-cronjob/config/**/*.yml
+        - tasks/kyc-status-updater-cronjob/**/*.js
+        - tasks/kyc-status-updater-cronjob/package*
+        - tasks/kyc-status-updater-cronjob/Dockerfile
+        - tasks/kyc-status-updater-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/kyc-status-updater-cronjob/config/**/*.yml
+        - tasks/kyc-status-updater-cronjob/**/*.js
+        - tasks/kyc-status-updater-cronjob/package*
+        - tasks/kyc-status-updater-cronjob/Dockerfile
+        - tasks/kyc-status-updater-cronjob/.gitlab-ci.yml
+        
+marketing-reminder-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/marketing-reminder-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/marketing-reminder-cronjob/config/**/*.yml
+        - tasks/marketing-reminder-cronjob/**/*.js
+        - tasks/marketing-reminder-cronjob/package*
+        - tasks/marketing-reminder-cronjob/Dockerfile
+        - tasks/marketing-reminder-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/marketing-reminder-cronjob/config/**/*.yml
+        - tasks/marketing-reminder-cronjob/**/*.js
+        - tasks/marketing-reminder-cronjob/package*
+        - tasks/marketing-reminder-cronjob/Dockerfile
+        - tasks/marketing-reminder-cronjob/.gitlab-ci.yml
+
+euro-message-feeder-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/euro-message-feeder-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/euro-message-feeder-cronjob/config/**/*.yml
+        - tasks/euro-message-feeder-cronjob/**/*.js
+        - tasks/euro-message-feeder-cronjob/package*
+        - tasks/euro-message-feeder-cronjob/Dockerfile
+        - tasks/euro-message-feeder-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/euro-message-feeder-cronjob/config/**/*.yml
+        - tasks/euro-message-feeder-cronjob/**/*.js
+        - tasks/euro-message-feeder-cronjob/package*
+        - tasks/euro-message-feeder-cronjob/Dockerfile
+        - tasks/euro-message-feeder-cronjob/.gitlab-ci.yml
+
+invalid-api-reminder-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/invalid-api-reminder-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/invalid-api-reminder-cronjob/config/**/*.yml
+        - tasks/invalid-api-reminder-cronjob/**/*.js
+        - tasks/invalid-api-reminder-cronjob/package*
+        - tasks/invalid-api-reminder-cronjob/Dockerfile
+        - tasks/invalid-api-reminder-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/invalid-api-reminder-cronjob/config/**/*.yml
+        - tasks/invalid-api-reminder-cronjob/**/*.js
+        - tasks/invalid-api-reminder-cronjob/package*
+        - tasks/invalid-api-reminder-cronjob/Dockerfile
+        - tasks/invalid-api-reminder-cronjob/.gitlab-ci.yml
+
+campaign-leaderboard-calculator-cronjob:
+  stage: microservice
+  trigger:
+    include:
+      - artifact: generic.yml
+        job: generic-task-config
+      - local: tasks/campaign-leaderboard-calculator-cronjob/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - *web-rule-trigger
+    - <<: *master-rule
+      changes:
+        - tasks/campaign-leaderboard-calculator-cronjob/config/**/*.yml
+        - tasks/campaign-leaderboard-calculator-cronjob/**/*.js
+        - tasks/campaign-leaderboard-calculator-cronjob/package*
+        - tasks/campaign-leaderboard-calculator-cronjob/Dockerfile
+        - tasks/campaign-leaderboard-calculator-cronjob/.gitlab-ci.yml
+    - <<: *develop-rule
+      changes:
+        - tasks/campaign-leaderboard-calculator-cronjob/config/**/*.yml
+        - tasks/campaign-leaderboard-calculator-cronjob/**/*.js
+        - tasks/campaign-leaderboard-calculator-cronjob/package*
+        - tasks/campaign-leaderboard-calculator-cronjob/Dockerfile
+        - tasks/campaign-leaderboard-calculator-cronjob/.gitlab-ci.yml

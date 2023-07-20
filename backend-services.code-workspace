@@ -1,0 +1,176 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.singleQuote": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "register (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/register"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "platform (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/platform"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "marketPlace (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/marketPlace"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "dashboard (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/dashboard"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "backtest (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/backtest"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "portfolio-cronjob (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/tasks/portfolio-cronjob"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "refresh-mv-cronjob (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/tasks/refresh-mv-cronjob"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "position (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/position"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "strategy (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/strategy"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "invalid-api-reminder-cronjob (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/tasks/invalid-api-reminder-cronjob"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "marketing-reminder-cronjob (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/tasks/marketing-reminder-cronjob"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "user (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/user"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "payment (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/payment"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "sms-sender (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/sms-sender"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "backtest (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/services/backtest"
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "campaign-leaderboard-calculator-cronjob (Debug)",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run-script", "start"],
+        "skipFiles": ["<node_internals>/**"],
+        "cwd": "${workspaceFolder}/tasks/campaign-leaderboard-calculator-cronjob"
+      },
+      {
+        "name": "Attach by Process ID",
+        "processId": "${command:PickProcess}",
+        "request": "attach",
+        "skipFiles": ["<node_internals>/**"],
+        "type": "node"
+      }
+    ]
+  }
+}

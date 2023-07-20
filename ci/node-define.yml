@@ -1,0 +1,25 @@
+.web-rule: &web-rule
+  if: $PIPELINE_SOURCE == "web" && ($CI_COMMIT_BRANCH =~ /(master|develop|feature|fix)/)
+
+.build-rule: &build-rule
+  - $SERVICE_BASE_PATH/package*
+  - $SERVICE_BASE_PATH/src/public/**
+  - $SERVICE_BASE_PATH/src/src/**
+  - $SERVICE_BASE_PATH/src/**/*.js
+  - $SERVICE_BASE_PATH/src/**/*.json
+
+.push-rule: &push-rule
+  if: $PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH =~ /(master|develop)/
+  changes: *build-rule
+
+.cache: &cache
+  key:
+    files:
+      - $SERVICE_BASE_PATH/package-lock.json
+      - $SERVICE_BASE_PATH/package.json
+    prefix: $SERVICE_NAME
+  paths:
+    - $SERVICE_BASE_PATH/node_modules
+    - $SERVICE_BASE_PATH/build
+    - $SERVICE_BASE_PATH/build.env
+  policy: pull-push

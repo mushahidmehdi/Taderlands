@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: backtest
+  SERVICE_BASE_PATH: services/backtest
+
+backtest-docker:
+  extends: .dockerize
+
+backtest-deploy:
+  extends: .aws

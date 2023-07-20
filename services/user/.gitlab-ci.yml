@@ -1,0 +1,13 @@
+stages:
+  - dockerize
+  - deploy
+
+variables:
+  SERVICE_NAME: user
+  SERVICE_BASE_PATH: services/user
+
+user-docker:
+  extends: .dockerize
+
+user-deploy:
+  extends: .aws

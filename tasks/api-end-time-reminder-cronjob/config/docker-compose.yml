@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+    api-end-time-reminder-cronjob:
+        image: ${CI_REGISTRY_IMAGE:-paratica}/service-api-end-time-reminder-cronjob:${VERSION:-latest}
+        environment:
+            SERVICE_NAME: api-end-time-reminder-cronjob
+            NODE_ENV: ${AWS_ENV}
+            WAIT_HOSTS: ${DB_IP}:5433
+            WAIT_SLEEP_INTERVAL: 10
+            WAIT_HOSTS_TIMEOUT: 120
+            DB_HOST: ${DB_IP}
+            DB_PORT: 5433
+            RABBITMQ_HOST: $INFRA_MAIN_IP
+            RABBITMQ_PORT: 5672
+            DATE_CONTROL_RANGE: 7
+            NOTIFICATIN_TEMPLATE_TITLE: API_END_TIME
+            SERVICE_TAGS: backend,api,api-end-time-reminder-cronjob

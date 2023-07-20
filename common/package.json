@@ -1,0 +1,58 @@
+{
+  "name": "@backend/common",
+  "version": "1.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@keycloak/keycloak-admin-client": "^16.1.1",
+    "@paratica/common": "file:../../../common",
+    "@prisma/client": "^4.8.0",
+    "amqp-connection-manager": "^4.1.2",
+    "amqplib": "^0.10.3",
+    "aws-sdk": "^2.1036.0",
+    "axios": "^0.25.0",
+    "bcrypt": "^5.1.0",
+    "i18n": "^0.14.2",
+    "ioredis": "^4.28.3",
+    "joi": "^17.4.0",
+    "koa-cash": "^4.1.0",
+    "koa-ratelimit": "^5.0.1",
+    "memoizee": "^0.4.15",
+    "mustache": "^4.2.0",
+    "speakeasy": "^2.0.0",
+    "dayjs": "^1.11.7"
+  },
+  "devDependencies": {
+    "@keycloak/keycloak-admin-client": "^16.1.1",
+    "@prisma/client": "^4.8.0",
+    "amqp-connection-manager": "^4.1.2",
+    "amqplib": "^0.10.3",
+    "axios": "^0.25.0",
+    "bcrypt": "^5.1.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "fast-safe-stringify": "^2.1.1",
+    "i18n": "^0.14.2",
+    "ioredis": "^4.28.3",
+    "joi": "^17.4.0",
+    "koa-cash": "^4.1.0",
+    "koa-ratelimit": "^5.0.1",
+    "memoizee": "^0.4.15",
+    "prettier": "^2.5.1",
+    "prisma": "^4.8.0",
+    "speakeasy": "^2.0.0"
+  },
+  "exports": {
+    "./": "./src/"
+  },
+  "dependencies": {
+    "@paratica/common": "file:../../common",
+    "dayjs": "^1.11.7"
+  }
+}
